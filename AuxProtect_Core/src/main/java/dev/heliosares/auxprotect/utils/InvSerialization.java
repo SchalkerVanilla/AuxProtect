@@ -126,22 +126,30 @@ public class InvSerialization {
 
             stream.writeInt(record.storage().length);
             for (ItemStack item : record.storage()) {
-                stream.writeObject(item);
+                if (item != null) {
+                    stream.writeObject(item);
+                }
             }
 
             stream.writeInt(record.armor().length);
             for (ItemStack item : record.armor()) {
-                stream.writeObject(item);
+                if (item != null) {
+                    stream.writeObject(item);
+                }
             }
 
             stream.writeInt(record.extra().length);
             for (ItemStack item : record.extra()) {
-                stream.writeObject(item);
+                if (item != null) {
+                    stream.writeObject(item);
+                }
             }
 
             stream.writeInt(record.ender().length);
             for (ItemStack item : record.ender()) {
-                stream.writeObject(item);
+                if (item != null) {
+                    stream.writeObject(item);
+                }
             }
 
             stream.writeInt(record.exp());
