@@ -26,7 +26,9 @@ public class InvSerialization {
             if (array.length > 1) stream.writeInt(array.length);
 
             for (ItemStack itemStack : array) {
-                stream.writeObject(itemStack);
+                try {
+                    stream.writeObject(itemStack);
+                } catch (NullPointerException ignored) {}
             }
             return byteArrayOutputStream.toByteArray();
         }
@@ -38,7 +40,9 @@ public class InvSerialization {
         }
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try (BukkitObjectOutputStream stream = new BukkitObjectOutputStream(byteArrayOutputStream)) {
-            stream.writeObject(item);
+            try {
+                stream.writeObject(item);
+            } catch (NullPointerException ignored) {}
             return byteArrayOutputStream.toByteArray();
         }
     }
@@ -126,30 +130,30 @@ public class InvSerialization {
 
             stream.writeInt(record.storage().length);
             for (ItemStack item : record.storage()) {
-                if (item != null) {
+                try {
                     stream.writeObject(item);
-                }
+                } catch (NullPointerException ignored) {}
             }
 
             stream.writeInt(record.armor().length);
             for (ItemStack item : record.armor()) {
-                if (item != null) {
+                try {
                     stream.writeObject(item);
-                }
+                } catch (NullPointerException ignored) {}
             }
 
             stream.writeInt(record.extra().length);
             for (ItemStack item : record.extra()) {
-                if (item != null) {
+                try {
                     stream.writeObject(item);
-                }
+                } catch (NullPointerException ignored) {}
             }
 
             stream.writeInt(record.ender().length);
             for (ItemStack item : record.ender()) {
-                if (item != null) {
+                try {
                     stream.writeObject(item);
-                }
+                } catch (NullPointerException ignored) {}
             }
 
             stream.writeInt(record.exp());
